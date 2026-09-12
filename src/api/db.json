@@ -1,0 +1,53 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "INSANE Clo",
+      "shop": "TEN11",
+      "oriPrice": 38.11,
+      "disPrice": 35.95,
+      "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/catalog/products/2026-06/10112606136/ISC%20(23).jpg"
+    },
+    {
+      "id": "2",
+      "name": "Casual Pocket Denim Jacket",
+      "shop": "TEN11",
+      "oriPrice": 23.11,
+      "disPrice": 19.95,
+      "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/catalog/products/2026-08/21226021859/STU_0408.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Lightweight Mock Neck Zipper Jacket",
+      "shop": "TEN11",
+      "oriPrice": 15.11,
+      "disPrice": 12.95,
+      "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/catalog/products/2026-08/11226021742/STU_9732.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Lightweight Hooded Windbreaker Jacket",
+      "shop": "TEN11",
+      "oriPrice": 40.11,
+      "disPrice": 34.95,
+      "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/catalog/products/2026-07-II/51202511010/STU_1117.jpg"
+    },
+    {
+      "name": "Classic Long-Sleeve Shirt",
+      "shop": "Zando",
+      "oriPrice": 30,
+      "disPrice": 27,
+      "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/cache/catalog/products/2026-09/1112608010/STU_6482-cr-450x672.jpg",
+      "id": "ZiVnr3UKVi0"
+    },
+    {
+      "name": "Austin Kinney",
+      "shop": "Minima earum fugiat",
+      "oriPrice": 806,
+      "disPrice": 955,
+      "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/catalog/products/2026-09/1112608010/STU_6478.jpg",
+      "id": "WpVk5f8yWzs"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
