@@ -36,11 +36,11 @@ function ProductDetail() {
         <div className="grid overflow-hidden rounded-2xl bg-white shadow-sm md:grid-cols-2">
           
           {/* Product Image */}
-          <div className="flex min-h-[500px] items-center justify-center bg-gray-100 p-8">
+          <div className="flex min-h-125 items-center justify-center bg-gray-100 p-8">
             <img
               src={product?.image}
               alt={product?.name}
-              className="h-[550px] w-full object-contain mix-blend-multiply"
+              className="h-137.5 w-full object-contain mix-blend-multiply"
             />
           </div>
 
