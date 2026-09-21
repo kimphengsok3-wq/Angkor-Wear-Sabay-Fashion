@@ -27,8 +27,7 @@ function ProductPage() {
   },[])
   return (
     <div>
-      <p>Product</p>
-      <div className='grid grid-cols-2 md:grid-cols-4 gap-5'>
+      <div className='grid grid-cols-2 md:grid-cols-4 gap-5 my-10'>
         
         {
           products.map(pro=>{

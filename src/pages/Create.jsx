@@ -34,7 +34,7 @@ function Create() {
 
     return (
         <div>
-            <form action="" className='w-96 border border-gray-300 m-auto mt-20 p-5 rounded-xl'>
+            <form action="" className='w-96 border border-gray-300 m-auto my-10 p-5 rounded-xl'>
                 <div className='text-2xl font-semibold'>Create New Product</div>
                 <div className='flex flex-col gap-4 mt-5'>
                     <div >
