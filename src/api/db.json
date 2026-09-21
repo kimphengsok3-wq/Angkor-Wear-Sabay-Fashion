@@ -47,6 +47,14 @@
       "disPrice": 955,
       "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/catalog/products/2026-09/1112608010/STU_6478.jpg",
       "id": "WpVk5f8yWzs"
+    },
+    {
+      "name": "rub",
+      "shop": "NIKE",
+      "oriPrice": 120,
+      "disPrice": 100,
+      "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/catalog/banner/2026/ZANDO%20New%20Version/New%20asset%20for%20updated%20size/by%20category/2.png",
+      "id": "eiIznBPDBKY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

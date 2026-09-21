@@ -1,6 +1,4 @@
-
 import { NavLink } from 'react-router-dom'
-import { RiReactjsFill } from "react-icons/ri";
 import shopLogo from '../assets/shop_logo.png'
 import React, { useState } from 'react'
 import { RxDragHandleHorizontal } from "react-icons/rx";
@@ -41,7 +39,7 @@ function Navbar() {
             </ul>
             <div className='hidden md:flex items-center gap-6'>
                 <input type="text" placeholder='Search' className='p-1 border border-gray-500 rounded-lg focus:outline-hidden'/>
-                <button className='bg-blue-500 text-white px-3 rounded-lg py-1'>Search</button>
+                <button className='bg-blue-500 text-white px-3 rounded-lg py-1 cursor-pointer'>Search</button>
             </div>
             <div className='md:hidden flex w-full justify-between items-center gap-3'>
               <img src={shopLogo} alt="Shop Logo" className='h-15 w-15' />
@@ -72,7 +70,7 @@ function Navbar() {
               </li>
               <li className='flex gap-5 mb-5'>
                   <input type="text" placeholder='Search' className='w-auto p-1 border border-gray-500 rounded-lg focus:outline-hidden'/>
-                  <button className='bg-blue-500 text-white px-3 rounded-lg py-1'>Search</button>
+                  <button className='bg-blue-500 text-white px-3 rounded-lg py-1 cursor-pointer'>Search</button>
               </li>
         </ul>
     </>
