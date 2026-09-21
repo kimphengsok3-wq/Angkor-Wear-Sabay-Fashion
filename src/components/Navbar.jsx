@@ -39,16 +39,12 @@ function Navbar() {
               </li>
             </ul>
             <div className='hidden md:flex items-center gap-6'>
-<<<<<<< HEAD
-                <input type="text" placeholder='Search' className='p-1 border border-gray-500 rounded-lg focus:outline-hidden'/>
-                <button className='bg-blue-500 text-white px-3 rounded-lg py-1 cursor-pointer'>Search</button>
-=======
+
                 <input type="text" placeholder='Search...' className='w-30 p-1 border border-gray-500 rounded-lg focus:outline-blue-500 '/>
                 <button className='bg-blue-500 text-white px-3 rounded-lg py-1'>Search</button>
                 <NavLink 
                   className={({isActive})=> isActive ? "block w-full text-white font-bold text-2xl p-1 bg-blue-500 rounded-lg transition-all duration-300 ease-in-out" : "text-black text-2xl"} 
                   to="/create"><MdOutlineAddCard /></NavLink>
->>>>>>> panha-branch
             </div>
             <div className='md:hidden flex w-full justify-end items-center gap-3'>
                 <NavLink 
@@ -80,14 +76,9 @@ function Navbar() {
                   to="/contact">Contact</NavLink>
               </li>
               <li className='flex gap-5 mb-5'>
-<<<<<<< HEAD
-                  <input type="text" placeholder='Search' className='w-auto p-1 border border-gray-500 rounded-lg focus:outline-hidden'/>
-                  <button className='bg-blue-500 text-white px-3 rounded-lg py-1 cursor-pointer'>Search</button>
-=======
+
                   <input type="text" placeholder='Search...' className='w-auto p-1 border border-gray-500 rounded-lg focus:outline-hidden'/>
                   <button className='bg-blue-500 text-white px-3 rounded-lg py-1'>Search</button>
-                  
->>>>>>> panha-branch
               </li>
         </ul>
     </>
