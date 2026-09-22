@@ -53,18 +53,7 @@
       "oriPrice": 30,
       "discountPercent": 10,
       "disPrice": 27,
-<<<<<<< Updated upstream
-      "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/cache/catalog/products/2026-09/1112608010/STU_6482-cr-450x672.jpg",
-      "id": "ZiVnr3UKVi0"
-    },
-    {
-      "name": "Austin Kinney",
-      "shop": "Minima earum fugiat",
-      "oriPrice": 806,
-      "disPrice": 955,
-      "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/catalog/products/2026-09/1112608010/STU_6478.jpg",
-      "id": "WpVk5f8yWzs"
-=======
+
       "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/cache/catalog/products/2026-09/1112608010/STU_6482-cr-450x672.jpg"
     },
     {
@@ -121,7 +110,6 @@
       "disPrice": 10.8,
       "image": "https://zand.sgp1.cdn.digitaloceanspaces.com/cache/catalog/products/2026-03/1322508378/H7_06718-cr-450x672.jpg",
       "id": "KJW_7kIR2sc"
->>>>>>> Stashed changes
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
