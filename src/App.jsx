@@ -6,8 +6,9 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ProductDetail from './pages/ProductDetail'
 import Create from './pages/Create'
-import ContactPage from './pages/ContectPage'
+import ContactPage from './pages/ContactPage'
 import ScrollToTop from './components/ScrollToTop'
+import FavoritePage from './pages/FavoritePage'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/product' element={<ProductPage/>}/>
         <Route path='/contact' element={<ContactPage/>}/>
         <Route path='/create' element={<Create/>}/>
+        <Route path='/favorite' element={<FavoritePage/>}/>
 
         <Route path='/product/:id' element={<ProductDetail/>}/>
       </Routes>

@@ -1,23 +1,156 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-function ProductCard({image, shop, name, oriPrice, disPrice}) {
-  return (
-    <div>
-        
-        <div className='relative'>
-            <img src={image} alt="" />
-            <div className='absolute bottom-0 text-white bg-red-500 px-3 py-1 '>-10%</div>
-        </div>
-        <div className='font-semibold mt-2 px-1'>
-            <div className='flex justify-between'>
-                <div>{shop}</div>
-                <div>❤️</div>
+function ProductCard({
+    id,
+    image,
+    shop,
+    name,
+    oriPrice,
+    disPrice,
+    discountPercent
+}) {
+
+    const [liked, setLiked] = useState(() => {
+        const favorites = JSON.parse(localStorage.getItem("favorites")) || []
+        return favorites.some(product => product.id === id)
+    })
+
+    function handleLike(e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const favorites =
+            JSON.parse(localStorage.getItem("favorites")) || []
+
+        if (liked) {
+
+            const newFavorites = favorites.filter(
+                product => String(product.id) !== String(id)
+            )
+
+            localStorage.setItem(
+                "favorites",
+                JSON.stringify(newFavorites)
+            )
+
+            setLiked(false)
+
+        } else {
+
+            const product = {
+                id,
+                image,
+                shop,
+                name,
+                oriPrice,
+                disPrice,
+                discountPercent
+            }
+
+            favorites.push(product)
+
+            localStorage.setItem(
+                "favorites",
+                JSON.stringify(favorites)
+            )
+
+            setLiked(true)
+        }
+    }
+
+
+    return (
+        <div className="group cursor-pointer">
+
+            {/* Product Image */}
+            <div className="relative overflow-hidden rounded-3xl bg-gray-100">
+
+                <img
+                    src={image}
+                    alt={name}
+                    className="h-96 w-full object-contain p-4 transition duration-500 group-hover:scale-105"
+                />
+
+                {/* Discount */}
+                {discountPercent > 0 && (
+                    <div className="absolute left-4 top-4 rounded-full bg-red-500 px-4 py-2 text-sm font-bold text-white shadow-md">
+                        -{discountPercent}%
+                    </div>
+                )}
+
+                {/* Favorite */}
+                <button
+                    onClick={handleLike}
+                    className={`absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-white text-2xl shadow-lg transition duration-200 hover:scale-110 ${
+                        liked
+                            ? 'text-red-500'
+                            : 'text-gray-700 hover:text-red-500'
+                    }`}
+                >
+                    {liked ? '♥' : '♡'}
+                </button>
+
+                {/* Add to Cart */}
+                <button
+                    onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        alert('Product added to cart!')
+                    }}
+                    className="absolute bottom-4 left-4 right-4 translate-y-16 rounded-2xl bg-black py-4 text-base font-semibold text-white opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-gray-800"
+                >
+                    Add to Cart
+                </button>
+
             </div>
-            <p>{name}</p>
-            <p className='text-red-500'>${disPrice} <span className='text-gray-600 line-through'>${oriPrice}</span></p>
-        </div>   
-    </div>
-  )
+
+            {/* Product Information */}
+            <div className="px-2 pt-5">
+
+                <p className="text-sm font-bold uppercase tracking-widest text-gray-400">
+                    {shop}
+                </p>
+
+                <h3 className="mt-2 line-clamp-2 text-lg font-semibold text-gray-900">
+                    {name}
+                </h3>
+
+                <div className="mt-3 flex items-center gap-3">
+
+                    <span className="text-2xl font-bold text-gray-900">
+                        ${Number(disPrice).toFixed(2)}
+                    </span>
+
+                    {Number(oriPrice) > Number(disPrice) && (
+                        <span className="text-base text-gray-400 line-through">
+                            ${Number(oriPrice).toFixed(2)}
+                        </span>
+                    )}
+
+                </div>
+
+                <div className="mt-4 flex items-center justify-between">
+
+                    <div className="flex items-center gap-1.5">
+                        <span className="text-lg text-yellow-400">
+                            ★
+                        </span>
+
+                        <span className="text-sm font-semibold text-gray-700">
+                            4.8
+                        </span>
+                    </div>
+
+                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-500">
+                        Free shipping
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+    )
 }
 
 export default ProductCard

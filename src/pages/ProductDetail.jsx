@@ -1,219 +1,506 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 
 function ProductDetail() {
 
   const [product, setProduct] = useState({})
+  const [quantity, setQuantity] = useState(1)
+  const [selectedSize, setSelectedSize] = useState("M")
+  const [selectedColor, setSelectedColor] = useState("Black")
+  const [liked, setLiked] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   const param = useParams()
   const id = param.id
 
-  const getProduct = async ()=>{
-    try{
+  const getProduct = async () => {
+
+    try {
+
+      setIsLoading(true)
+
       const res = await fetch(`http://localhost:8000/products/${id}`)
+
+      if (!res.ok) {
+        throw new Error("Product not found")
+      }
+
       const data = await res.json()
+
       setProduct(data)
-    }catch(error){
-      console.log(error);
+
+    } catch (error) {
+
+      console.log(error)
+      setError(true)
+
+    } finally {
+
+      setIsLoading(false)
+
     }
   }
-  useEffect(()=>{
-    getProduct()
-  },[])
 
-  return (
-    <div className="min-h-screen bg-gray-50 px-4 py-10">
-      <div className="mx-auto max-w-6xl">
-        {/* Breadcrumb */}
-        
-        <div className="mb-6 text-sm text-gray-500">
-          Home <span className="mx-2">/</span>
-          Dresses <span className="mx-2">/</span>
-          <span className="text-gray-900">{product?.name}</span>
+  useEffect(() => {
+    getProduct()
+  }, [id])
+
+
+  // Loading
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+
+        <div className="text-center">
+
+          <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-black" />
+
+          <p className="text-gray-500">
+            Loading product...
+          </p>
+
         </div>
 
-        {/* Product Card */}
-        <div className="grid overflow-hidden rounded-2xl bg-white shadow-sm md:grid-cols-2">
-          
-          {/* Product Image */}
-          <div className="flex min-h-125 items-center justify-center bg-gray-100 p-8">
-            <img
-              src={product?.image}
-              alt={product?.name}
-              className="h-137.5 w-full object-contain mix-blend-multiply"
-            />
+      </div>
+    )
+  }
+
+
+  // Error
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+
+        <div className="text-center">
+
+          <div className="text-6xl mb-4">
+            😕
           </div>
 
-          {/* Product Information */}
-          <div className="flex flex-col p-8 md:p-12">
-            
-            {/* Shop */}
-            <div className="mb-3">
-              <span className="text-sm font-medium uppercase tracking-wider text-gray-500">
-                {product?.shop}
-                
-              </span>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Product Not Found
+          </h1>
+
+          <p className="mt-2 text-gray-500">
+            Sorry, we couldn't find this product.
+          </p>
+
+        </div>
+
+      </div>
+    )
+  }
+
+
+  return (
+
+    <div className="min-h-screen bg-gray-50">
+
+      <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 lg:px-8">
+
+        {/* Breadcrumb */}
+        <div className="mb-8 flex items-center gap-2 text-sm text-gray-500">
+
+          <span className="hover:text-black cursor-pointer">
+            Home
+          </span>
+
+          <span>/</span>
+
+          <span className="capitalize">
+            {product?.type}
+          </span>
+
+          <span>/</span>
+
+          <span className="truncate text-gray-900">
+            {product?.name}
+          </span>
+
+        </div>
+
+
+        {/* Main Product */}
+        <div className="grid overflow-hidden rounded-3xl bg-white shadow-sm lg:grid-cols-2">
+
+          {/* Image Section */}
+          <div className="relative bg-gray-100">
+
+            {/* Discount */}
+            {product?.discountPercent > 0 && (
+              <div className="absolute left-6 top-6 z-10 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white">
+                -{product?.discountPercent}%
+              </div>
+            )}
+
+
+            {/* Favorite */}
+            <button
+              onClick={() => setLiked(!liked)}
+              className={`absolute right-6 top-6 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white text-2xl shadow-md transition ${
+                liked
+                  ? "text-red-500"
+                  : "text-gray-700 hover:text-red-500"
+              }`}
+            >
+              {liked ? "♥" : "♡"}
+            </button>
+
+
+            {/* Product Image */}
+            <div className="flex min-h-130 items-center justify-center p-8 md:min-h-160">
+
+              <img
+                src={product?.image}
+                alt={product?.name}
+                className="max-h-145 w-full object-contain mix-blend-multiply transition duration-500 hover:scale-105"
+              />
+
             </div>
 
-            {/* Name */}
+          </div>
+
+
+          {/* Product Information */}
+          <div className="flex flex-col p-6 md:p-10 lg:p-12">
+
+            {/* Shop */}
+            <div className="mb-3">
+
+              <span className="text-sm font-bold uppercase tracking-widest text-gray-500">
+                {product?.shop}
+              </span>
+
+            </div>
+
+
+            {/* Product Name */}
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
               {product?.name}
             </h1>
 
+
+            {/* Category */}
+            <div className="mt-3 flex flex-wrap gap-2">
+
+              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium capitalize text-gray-600">
+                {product?.type}
+              </span>
+
+              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium capitalize text-gray-600">
+                {product?.people}
+              </span>
+
+            </div>
+
+
             {/* Rating */}
-            <div className="mt-4 flex items-center gap-2">
+            <div className="mt-5 flex items-center gap-3">
+
               <div className="flex text-yellow-400">
                 ★★★★★
               </div>
 
-              <span className="text-sm text-gray-500">
-                4.8 (124 reviews)
+              <span className="text-sm font-medium text-gray-600">
+                4.8
               </span>
+
+              <span className="text-sm text-gray-400">
+                (124 reviews)
+              </span>
+
             </div>
+
 
             {/* Price */}
-            <div className="mt-8 flex items-center gap-3">
-              <span className="text-3xl font-bold text-gray-900">
-                ${product?.disPrice?.toFixed(2)}
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+
+              <span className="text-4xl font-bold text-gray-900">
+                ${Number(product?.disPrice).toFixed(2)}
               </span>
 
-              <span className="text-lg text-gray-400 line-through">
-                ${product?.oriPrice?.toFixed(2)}
-              </span>
+              {Number(product?.oriPrice) > Number(product?.disPrice) && (
+                <span className="text-lg text-gray-400 line-through">
+                  ${Number(product?.oriPrice).toFixed(2)}
+                </span>
+              )}
 
-              <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-600">
-                SALE
-              </span>
+              {product?.discountPercent > 0 && (
+                <span className="rounded-full bg-red-50 px-3 py-1 text-xs font-bold text-red-600">
+                  SAVE {product?.discountPercent}%
+                </span>
+              )}
+
             </div>
+
 
             {/* Description */}
             <p className="mt-6 leading-7 text-gray-600">
-              A stylish spaghetti strap mini dress designed for a clean,
-              comfortable and elegant look. Perfect for casual days,
-              parties, or a night out.
+              A stylish and comfortable {product?.type} designed for
+              {product?.people === "kids"
+                ? " kids."
+                : ` ${product?.people}.`}
+              {" "}Perfect for everyday wear and casual occasions.
             </p>
 
-            <div className="my-8 h-px bg-gray-200" />
+
+            <div className="my-7 h-px bg-gray-200" />
+
 
             {/* Size */}
             <div>
-              <div className="mb-3 flex items-center justify-between">
-                <span className="font-semibold text-gray-900">Size</span>
 
-                <button className="text-sm text-gray-500 underline">
+              <div className="mb-3 flex items-center justify-between">
+
+                <span className="font-semibold text-gray-900">
+                  Size
+                </span>
+
+                <button className="text-sm text-gray-500 underline hover:text-black">
                   Size Guide
                 </button>
+
               </div>
 
-              <div className="flex gap-3">
+
+              <div className="flex flex-wrap gap-3">
+
                 {["XS", "S", "M", "L", "XL"].map((size) => (
+
                   <button
                     key={size}
-                    className="h-11 w-11 rounded-lg border border-gray-300 text-sm font-medium transition hover:border-black hover:bg-black hover:text-white"
+                    onClick={() => setSelectedSize(size)}
+                    className={`h-11 w-12 rounded-lg border text-sm font-semibold transition ${
+                      selectedSize === size
+                        ? "border-black bg-black text-white"
+                        : "border-gray-300 bg-white text-gray-700 hover:border-black"
+                    }`}
                   >
                     {size}
                   </button>
+
                 ))}
+
               </div>
+
             </div>
+
 
             {/* Color */}
             <div className="mt-7">
-              <span className="mb-3 block font-semibold text-gray-900">
-                Color
-              </span>
 
-              <div className="flex gap-3">
-                <button className="h-9 w-9 rounded-full bg-black ring-2 ring-black ring-offset-2" />
-                <button className="h-9 w-9 rounded-full bg-white ring-1 ring-gray-300" />
-                <button className="h-9 w-9 rounded-full bg-pink-400 ring-1 ring-gray-200" />
+              <div className="mb-3">
+
+                <span className="font-semibold text-gray-900">
+                  Color:
+                </span>
+
+                <span className="ml-2 text-sm text-gray-500">
+                  {selectedColor}
+                </span>
+
               </div>
+
+
+              <div className="flex gap-4">
+
+                {/* Black */}
+                <button
+                  onClick={() => setSelectedColor("Black")}
+                  className={`h-9 w-9 rounded-full bg-black transition ${
+                    selectedColor === "Black"
+                      ? "ring-2 ring-black ring-offset-2"
+                      : ""
+                  }`}
+                />
+
+                {/* White */}
+                <button
+                  onClick={() => setSelectedColor("White")}
+                  className={`h-9 w-9 rounded-full border border-gray-300 bg-white transition ${
+                    selectedColor === "White"
+                      ? "ring-2 ring-black ring-offset-2"
+                      : ""
+                  }`}
+                />
+
+                {/* Pink */}
+                <button
+                  onClick={() => setSelectedColor("Pink")}
+                  className={`h-9 w-9 rounded-full bg-pink-400 transition ${
+                    selectedColor === "Pink"
+                      ? "ring-2 ring-black ring-offset-2"
+                      : ""
+                  }`}
+                />
+
+              </div>
+
             </div>
 
-            {/* Quantity + Add Cart */}
+
+            {/* Quantity + Cart */}
             <div className="mt-8 flex gap-3">
-              <div className="flex items-center rounded-xl border border-gray-300">
-                <button className="px-4 py-3 text-lg text-gray-500 hover:text-black">
+
+              {/* Quantity */}
+              <div className="flex items-center rounded-xl border border-gray-300 bg-white">
+
+                <button
+                  onClick={() =>
+                    setQuantity(quantity > 1 ? quantity - 1 : 1)
+                  }
+                  className="px-4 py-3 text-lg text-gray-500 transition hover:text-black"
+                >
                   −
                 </button>
 
-                <span className="px-3 font-medium">1</span>
+                <span className="min-w-8 text-center font-semibold">
+                  {quantity}
+                </span>
 
-                <button className="px-4 py-3 text-lg text-gray-500 hover:text-black">
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="px-4 py-3 text-lg text-gray-500 transition hover:text-black"
+                >
                   +
                 </button>
+
               </div>
 
-              <button className="flex flex-1 items-center justify-center rounded-xl bg-black px-6 py-3 font-semibold text-white transition hover:bg-gray-800">
+
+              {/* Add Cart */}
+              <button
+                onClick={() => alert("Product added to cart!")}
+                className="flex flex-1 items-center justify-center rounded-xl bg-black px-6 py-3 font-semibold text-white transition hover:bg-gray-800 active:scale-[0.98]"
+              >
                 Add to Cart
               </button>
 
-              <button className="rounded-xl border border-gray-300 px-5 text-xl transition hover:bg-gray-100">
-                ♡
-              </button>
             </div>
 
+
             {/* Buy Now */}
-            <button className="mt-3 w-full rounded-xl border-2 border-black py-3 font-semibold text-black transition hover:bg-black hover:text-white">
+            <button
+              onClick={() => alert("Buy Now")}
+              className="mt-3 w-full rounded-xl border-2 border-black py-3 font-semibold text-black transition hover:bg-black hover:text-white"
+            >
               Buy Now
             </button>
 
+
             {/* Shipping */}
             <div className="mt-8 grid grid-cols-2 gap-4 border-t border-gray-200 pt-6">
+
               <div>
+
                 <p className="font-semibold text-gray-900">
                   🚚 Free Shipping
                 </p>
+
                 <p className="mt-1 text-sm text-gray-500">
                   On orders over $50
                 </p>
+
               </div>
 
+
               <div>
+
                 <p className="font-semibold text-gray-900">
                   ↩ Easy Returns
                 </p>
+
                 <p className="mt-1 text-sm text-gray-500">
                   30 day return policy
                 </p>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
 
+
         {/* Product Details */}
-        <div className="mt-8 rounded-2xl bg-white p-8 shadow-sm">
-          <h2 className="text-xl font-bold text-gray-900">
+        <div className="mt-8 rounded-3xl bg-white p-6 shadow-sm md:p-8">
+
+          <h2 className="text-2xl font-bold text-gray-900">
             Product Details
           </h2>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-sm text-gray-500">Brand</p>
-              <p className="mt-1 font-semibold">{product?.shop}</p>
-            </div>
+          <p className="mt-2 text-gray-500">
+            More information about this product
+          </p>
 
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-sm text-gray-500">Category</p>
-              <p className="mt-1 font-semibold">Dresses</p>
-            </div>
 
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-sm text-gray-500">Product ID</p>
-              <p className="mt-1 font-semibold">#{product?.id}</p>
-            </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-sm text-gray-500">Availability</p>
-              <p className="mt-1 font-semibold text-green-600">
-                In Stock
+            {/* Brand */}
+            <div className="rounded-2xl bg-gray-50 p-5">
+
+              <p className="text-sm text-gray-500">
+                Brand
               </p>
+
+              <p className="mt-2 font-semibold text-gray-900">
+                {product?.shop}
+              </p>
+
             </div>
+
+
+            {/* Category */}
+            <div className="rounded-2xl bg-gray-50 p-5">
+
+              <p className="text-sm text-gray-500">
+                Category
+              </p>
+
+              <p className="mt-2 font-semibold capitalize text-gray-900">
+                {product?.type}
+              </p>
+
+            </div>
+
+
+            {/* For */}
+            <div className="rounded-2xl bg-gray-50 p-5">
+
+              <p className="text-sm text-gray-500">
+                For
+              </p>
+
+              <p className="mt-2 font-semibold capitalize text-gray-900">
+                {product?.people}
+              </p>
+
+            </div>
+
+
+            {/* Product ID */}
+            <div className="rounded-2xl bg-gray-50 p-5">
+
+              <p className="text-sm text-gray-500">
+                Product ID
+              </p>
+
+              <p className="mt-2 font-semibold text-gray-900">
+                #{product?.id}
+              </p>
+
+            </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
-  );
+  )
 }
 
 export default ProductDetail
