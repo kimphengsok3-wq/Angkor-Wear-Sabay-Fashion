@@ -63,11 +63,13 @@ function HomePage() {
             {products.slice(0, 8).map((pro) => (
               <NavLink key={pro.id} to={`/product/${pro.id}`}>
                 <ProductCard
-                  image={pro.image}
-                  shop={pro.shop}
-                  name={pro.name}
-                  oriPrice={pro.oriPrice}
-                  disPrice={pro.disPrice}
+                    id={pro.id}
+                    image={pro.image}
+                    shop={pro.shop}
+                    name={pro.name}
+                    oriPrice={pro.oriPrice}
+                    disPrice={pro.disPrice}
+                    discountPercent={pro.discountPercent}
                 />
               </NavLink>
             ))}
