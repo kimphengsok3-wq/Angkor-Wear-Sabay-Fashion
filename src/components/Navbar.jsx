@@ -2,8 +2,9 @@ import { NavLink } from 'react-router-dom'
 import shopLogo from '../assets/shop_logo.png'
 import React, { useState } from 'react'
 import { RxDragHandleHorizontal } from "react-icons/rx";
-import { MdOutlineAddCard } from "react-icons/md";
+import { TbLogout } from "react-icons/tb";
 import { MdFavorite } from "react-icons/md";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 
 function Navbar() {
 
@@ -22,7 +23,7 @@ function Navbar() {
               <li>
                 <NavLink 
                   className={({isActive})=> isActive ? "font-bold underline underline-offset-5 rounded-lg transition-all duration-300 ease-in-out" : "text-black"} 
-                  to="/">Home</NavLink>
+                  to="/home">Home</NavLink>
               </li>
 
               <li>
@@ -46,6 +47,12 @@ function Navbar() {
 
             <div className='hidden md:flex items-center gap-3'>
                 <NavLink 
+                  className={({isActive})=> isActive ? "text-blue-600 font-bold text-2xl p-1 bg-gray-300 rounded-lg transition-all duration-300 ease-in-out" : "text-black text-2xl"} 
+                  to="/cart">
+                  <HiOutlineShoppingCart />
+                </NavLink>
+
+                <NavLink 
                   className={({isActive})=> isActive ? "text-red-500 font-bold text-2xl p-1 bg-gray-300 rounded-lg transition-all duration-300 ease-in-out" : "text-red-500 text-2xl"} 
                   to="/favorite">
                   <MdFavorite />
@@ -53,13 +60,19 @@ function Navbar() {
 
                 <NavLink 
                   className={({isActive})=> isActive ? "text-black font-bold text-2xl p-1 bg-gray-300 rounded-lg transition-all duration-300 ease-in-out" : "text-black text-2xl"} 
-                  to="/create">
-                  <MdOutlineAddCard />
+                  to="/">
+                  <TbLogout />
                 </NavLink>
             </div>
 
             <div className='md:hidden flex w-full justify-end items-center gap-3'>
                 <NavLink 
+                  className={({isActive})=> isActive ? "text-blue-600 font-bold text-2xl p-1 bg-gray-300 rounded-lg transition-all duration-300 ease-in-out" : "text-black text-2xl"} 
+                  to="/cart">
+                  <HiOutlineShoppingCart />
+                </NavLink>
+                
+                <NavLink 
                   className={({isActive})=> isActive ? "text-red-500 font-bold text-2xl p-1 bg-gray-300 rounded-lg transition-all duration-300 ease-in-out" : "text-red-500 text-2xl"} 
                   to="/favorite">
                   <MdFavorite />
@@ -67,8 +80,8 @@ function Navbar() {
 
                 <NavLink 
                   className={({isActive})=> isActive ? "text-black font-bold text-2xl p-1 bg-gray-300 rounded-lg transition-all duration-300 ease-in-out" : "text-black text-2xl"} 
-                  to="/create">
-                  <MdOutlineAddCard />
+                  to="/">
+                  <TbLogout />
                 </NavLink>
 
                 <RxDragHandleHorizontal 
@@ -83,7 +96,7 @@ function Navbar() {
             <li className='w-full mt-3'>
                 <NavLink 
                   className={({isActive})=> isActive ? "font-bold underline underline-offset-5 rounded-lg transition-all duration-300 ease-in-out" : "text-black"} 
-                  to="/">Home</NavLink>
+                  to="/home">Home</NavLink>
             </li>
 
             <li className='w-full'>

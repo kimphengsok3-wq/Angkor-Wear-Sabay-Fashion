@@ -1,6 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { AiFillTikTok } from "react-icons/ai";
+import { ImYoutube } from "react-icons/im";
+
 function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
@@ -25,39 +30,39 @@ function Footer() {
             {/* Social Media */}
             <div className="flex gap-3 mt-6">
               <a
-                href="#"
+                href="https://web.facebook.com/"
                 className="w-10 h-10 flex items-center justify-center
-                rounded-full bg-gray-800 hover:bg-blue-400
+                rounded-full bg-white hover:bg-gray-300
                 transition"
               >
-                f
+                <FaFacebook className='text-blue-500'/>
               </a>
 
               <a
-                href="#"
+                href="https://www.instagram.com/"
                 className="w-10 h-10 flex items-center justify-center
-                rounded-full bg-gray-800 hover:bg-blue-400
-                transition"
+                rounded-full bg-white hover:bg-gray-300
+                transition "
               >
-                ◎
+                <FaInstagram className='text-black'/>
               </a>
 
               <a
-                href="#"
+                href="https://www.tiktok.com/"
                 className="w-10 h-10 flex items-center justify-center
-                rounded-full bg-gray-800 hover:bg-blue-400
+                rounded-full bg-white hover:bg-gray-300
                 transition"
               >
-                ♪
+                <AiFillTikTok className='text-black'/>
               </a>
 
               <a
-                href="#"
+                href="https://www.youtube.com/"
                 className="w-10 h-10 flex items-center justify-center
-                rounded-full bg-gray-800 hover:bg-blue-400
+                rounded-full bg-white hover:bg-gray-300
                 transition"
               >
-                ▶
+                <ImYoutube className='text-red-500'/>
               </a>
             </div>
           </div>
@@ -71,7 +76,7 @@ function Footer() {
 
             <ul className="space-y-3 text-gray-400">
               <li>
-                <NavLink className="hover:text-white transition" to="/">Home</NavLink>
+                <NavLink className="hover:text-white transition" to="/home">Home</NavLink>
               </li>
               <li>
                 <NavLink className="hover:text-white transition" to="/product">Product</NavLink>

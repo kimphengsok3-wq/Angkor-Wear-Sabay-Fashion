@@ -151,7 +151,13 @@ function ContactPage() {
             </p>
 
 
-            <form className="space-y-5">
+            <form
+              className="space-y-5"
+              onSubmit={(e) => {
+                e.preventDefault()
+                alert("Message sent successfully!")
+              }}
+            >
 
               {/* Name */}
               <div>
