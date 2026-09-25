@@ -156,6 +156,7 @@ function ContactPage() {
               onSubmit={(e) => {
                 e.preventDefault()
                 alert("Message sent successfully!")
+                e.target.reset()
               }}
             >
 
